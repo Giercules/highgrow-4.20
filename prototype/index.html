@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HighGrow Reboot — Visual Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-mark">🌿</span>
+        <div>
+          <h1>HighGrow</h1>
+          <p class="subtitle">Reboot prototype — Phase 0</p>
+        </div>
+      </div>
+      <div class="progression">
+        <div class="level-badge">
+          <span class="label">Level</span>
+          <span id="player-level">3</span>
+        </div>
+        <div class="xp-wrap">
+          <div class="xp-meta">
+            <span>Grow XP</span>
+            <span id="xp-text">240 / 500</span>
+          </div>
+          <div class="xp-bar"><div id="xp-fill" class="xp-fill"></div></div>
+        </div>
+        <div class="coin-badge" title="Grow Coins">
+          <span class="coin-icon">◎</span>
+          <span id="coin-count">1250</span>
+        </div>
+        <div class="streak-badge" title="Daily visit streak">
+          <span>🔥</span>
+          <span id="streak-count">5</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="gauge-panel glass">
+        <h2>Room Vitals</h2>
+        <div class="gauge" data-gauge="day">
+          <div class="gauge-head"><span>Day</span><strong id="grow-day">42</strong></div>
+          <div class="gauge-track"><div class="gauge-fill day"></div></div>
+        </div>
+        <div class="gauge" data-gauge="temp">
+          <div class="gauge-head"><span>Temp</span><strong id="temp-val">78°F</strong></div>
+          <div class="gauge-track"><div id="temp-fill" class="gauge-fill temp"></div></div>
+        </div>
+        <div class="gauge" data-gauge="humidity">
+          <div class="gauge-head"><span>Humidity</span><strong id="humidity-val">58%</strong></div>
+          <div class="gauge-track"><div id="humidity-fill" class="gauge-fill humidity"></div></div>
+        </div>
+        <div class="gauge" data-gauge="ph">
+          <div class="gauge-head"><span>Soil pH</span><strong id="ph-val">6.4</strong></div>
+          <div class="gauge-track"><div id="ph-fill" class="gauge-fill ph"></div></div>
+        </div>
+        <div class="plant-cards" id="plant-cards"></div>
+      </aside>
+
+      <section class="scene-wrap">
+        <canvas id="grow-canvas" width="1280" height="720"></canvas>
+        <div class="scene-overlay">
+          <span id="room-name">Basement Bloom Room</span>
+          <span id="lamp-type" class="lamp-tag">HPS 600W</span>
+        </div>
+        <div id="journal" class="journal-toast hidden"></div>
+      </section>
+
+      <aside class="action-panel glass">
+        <h2>Today's Care</h2>
+        <p class="hint">Mock loop — validates feel before Godot port.</p>
+        <div class="care-grid">
+          <button class="care-btn" data-action="visit" id="btn-visit">
+            <span class="icon">👁</span>
+            <span>Visit plants</span>
+            <span class="xp-tag">+15 XP</span>
+          </button>
+          <button class="care-btn" data-action="water" id="btn-water">
+            <span class="icon">💧</span>
+            <span>Water</span>
+            <span class="xp-tag">+20 XP</span>
+          </button>
+          <button class="care-btn" data-action="feed" id="btn-feed">
+            <span class="icon">🧪</span>
+            <span>Feed NPK</span>
+            <span class="xp-tag">+25 XP</span>
+          </button>
+          <button class="care-btn" data-action="light-up" id="btn-light">
+            <span class="icon">💡</span>
+            <span>Raise lights</span>
+            <span class="xp-tag">+10 XP</span>
+          </button>
+          <button class="care-btn" data-action="prune" id="btn-prune">
+            <span class="icon">✂</span>
+            <span>Top plant B</span>
+            <span class="xp-tag">+30 XP</span>
+          </button>
+          <button class="care-btn primary" data-action="end-day" id="btn-end-day">
+            <span class="icon">🌙</span>
+            <span>End day</span>
+          </button>
+        </div>
+        <button class="shop-trigger" id="btn-shop">Upgrade Shop</button>
+      </aside>
+    </main>
+  </div>
+
+  <div id="shop-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel glass">
+      <header class="modal-head">
+        <h2>Grow Shop</h2>
+        <button id="shop-close" class="icon-btn" aria-label="Close">✕</button>
+      </header>
+      <p class="shop-balance">Balance: <strong id="shop-coins">1250</strong> Grow Coins</p>
+      <div id="shop-items" class="shop-grid"></div>
+    </div>
+  </div>
+
+  <div id="levelup-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel glass levelup">
+      <h2>Level Up!</h2>
+      <p id="levelup-text">You reached level 4</p>
+      <button id="levelup-ok" class="care-btn primary">Keep growing</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
