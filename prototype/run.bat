@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 echo.
-echo  HighGrow Reboot — Phase 0 Visual Prototype
+echo  Bloom — Phase 0 Visual Prototype
 echo  Starting local server (ES modules require http://)...
 echo.
 

@@ -1127,7 +1127,7 @@ BOOL PACodeRegistration(HWND hwnd, HINSTANCE hInst)
     { // called if he calls up the Code Registration menu item or button
     if(gbRegistered)
         { // don't bother if already registered
-        MessageBox(hwnd, "This version of HighGrow is already registered !!",
+        MessageBox(hwnd, "This version of Bloom is already registered !!",
                    "Hey?", MB_APPLMODAL | MB_OK);
         return FALSE;
         }

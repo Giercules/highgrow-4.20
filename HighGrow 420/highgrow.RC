@@ -65,14 +65,14 @@ MENU MENU DISCARDABLE
 BEGIN
     POPUP "&Start"
     BEGIN
-        MENUITEM "&HighGrow Objectives..\tCtrl+O", IDM_OBJECTIVES
+        MENUITEM "&Bloom Objectives..\tCtrl+O", IDM_OBJECTIVES
         MENUITEM "&Rasta Robbie's Rules..\tCtrl+W", IDM_ROBBIE
         MENUITEM "&Planting Your Seeds..\tCtrl+P", IDM_PLANTING
         MENUITEM SEPARATOR
         MENUITEM "Start &Music Playback\tCtrl+M", IDM_SOUND
         MENUITEM "&Harvested Plants Log..\tCtrl+H", IDM_PLOG, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "E&xit HighGrow\tCtrl+X",      IDM_EXIT
+        MENUITEM "E&xit Bloom\tCtrl+X",      IDM_EXIT
     END
     POPUP "&Grow Rooms"
     BEGIN
@@ -109,7 +109,7 @@ BEGIN
     BEGIN
         MENUITEM "&Alarm Clock..\tCtrl+K",      IDM_ALARMSET
         MENUITEM "&Vacation Mode..\tCtrl+V",    IDM_VACMODEON
-        MENUITEM "&Lock HighGrow..\tCtrl+L",    IDM_LOCK
+        MENUITEM "&Lock Bloom..\tCtrl+L",    IDM_LOCK
         MENUITEM "&Grow Room Music..\tCtrl+S",  IDM_SOUNDON
         MENUITEM SEPARATOR
         MENUITEM "&Auto Grow Room Entry\tCtrl+E", IDM_AUTOGROW
@@ -120,7 +120,7 @@ BEGIN
         MENUITEM "&Contents\tF1",               IDM_HELPCONTENTS
         MENUITEM "&Growing Tips\tCtrl+T",       IDM_HELPTIPS
         MENUITEM SEPARATOR
-        MENUITEM "&About HighGrow...\tCtrl+A",  IDM_ABOUT
+        MENUITEM "&About Bloom...\tCtrl+A",  IDM_ABOUT
     END
 END
 
@@ -130,10 +130,10 @@ BEGIN
     BEGIN
         MENUITEM "&Enter Grow Room..",          IDM_GROWROOM
         MENUITEM SEPARATOR
-        MENUITEM "&HighGrow Help..",            IDM_HELPCONTENTS
-        MENUITEM "&About HighGrow..",           IDM_ABOUT
+        MENUITEM "&Bloom Help..",            IDM_HELPCONTENTS
+        MENUITEM "&About Bloom..",           IDM_ABOUT
         MENUITEM SEPARATOR
-        MENUITEM "E&xit HighGrow",              IDM_EXIT
+        MENUITEM "E&xit Bloom",              IDM_EXIT
     END
 END
 
@@ -183,16 +183,16 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "Comments", "HighGrow is finally FREEWARE !!\0"
+            VALUE "Comments", "Bloom is finally FREEWARE !!\0"
             VALUE "CompanyName", "Slick Software\0"
-            VALUE "FileDescription", "HighGrow - Legal Marijuana Growing\0"
+            VALUE "FileDescription", "Bloom - Legal Marijuana Growing\0"
             VALUE "FileVersion", "3.0\0"
-            VALUE "InternalName", "HighGrow\0"
-            VALUE "LegalCopyright", "Copyright © Slick Software 2002\0"
+            VALUE "InternalName", "Bloom\0"
+            VALUE "LegalCopyright", "Copyright ï¿½ Slick Software 2002\0"
             VALUE "LegalTrademarks", "Slick Software is dedicated to creating fun educational software\0"
-            VALUE "OriginalFilename", "HighGrow\0"
+            VALUE "OriginalFilename", "Bloom\0"
             VALUE "PrivateBuild", "3.11\0"
-            VALUE "ProductName", "HighGrow\0"
+            VALUE "ProductName", "Bloom\0"
             VALUE "ProductVersion", "3.0\0"
             VALUE "SpecialBuild", "\0"
         END
@@ -245,11 +245,11 @@ END
 ABOUT DIALOGEX 22, 17, 349, 185
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE
-CAPTION "About HighGrow"
+CAPTION "About Bloom"
 FONT 8, "MS Sans Serif"
 BEGIN
     PUSHBUTTON      "&Continue",IDCANCEL,256,166,88,14,WS_GROUP
-    CTEXT           "HighGrow ",IDC_ST02,165,9,173,17,SS_SUNKEN
+    CTEXT           "Bloom ",IDC_ST02,165,9,173,17,SS_SUNKEN
     LTEXT           "Freeware Version 4.20",IDC_ST03,166,34,115,11
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,159,5,185,156
     LTEXT           "You can now also download additional room image files to use in your new grow rooms by..",
@@ -262,7 +262,7 @@ BEGIN
     LTEXT           "or you can email me at:",IDC_STATIC,166,144,77,10
     LTEXT           "http://www.highgrow.us",IDC_ST05,243,129,95,10
     LTEXT           "Visiting our web site at:",IDC_STATIC,166,129,77,10
-    LTEXT           "This Freeware version of HighGrow 4.20 may be copied and shared freely with all your friends. Please also feel free to offer it as a download link from your web-site.",
+    LTEXT           "This Freeware version of Bloom 4.20 may be copied and shared freely with all your friends. Please also feel free to offer it as a download link from your web-site.",
                     IDC_STATIC,166,65,171,31
 END
 
@@ -454,7 +454,7 @@ END
 OBJECT DIALOGEX 0, 0, 395, 199
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE
-CAPTION "HighGrow Program Objectives"
+CAPTION "Bloom Program Objectives"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "&Exit",IDCANCEL,365,181,25,15
@@ -563,7 +563,7 @@ BEGIN
     PUSHBUTTON      "&Help",IDC_BT01,163,204,40,14
     CONTROL         "",IDC_ST02,"Static",SS_GRAYFRAME | SS_SUNKEN,14,13,190,
                     135
-    CTEXT           "HighGrow performs regular date and time checks, and has now detected that these have been altered in an attempt to influence the daily plant growth.",
+    CTEXT           "Bloom performs regular date and time checks, and has now detected that these have been altered in an attempt to influence the daily plant growth.",
                     IDC_ST03,16,152,184,48
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,5,5,207,219
 END
@@ -579,7 +579,7 @@ BEGIN
     CONTROL         "",IDC_ST01,"Static",SS_ETCHEDFRAME | SS_SUNKEN,170,75,
                     206,112
     CTEXT           "Harvesting",IDA_ST01,5,5,371,17,SS_SUNKEN
-    LTEXT           "When you harvest your plant, all it's leaves and flowering buds are removed, weighed and graded according to their potency. The health, potency, height and weight are recorded in the plant log and will be printed out on a HighGrow certificate.",
+    LTEXT           "When you harvest your plant, all it's leaves and flowering buds are removed, weighed and graded according to their potency. The health, potency, height and weight are recorded in the plant log and will be printed out on a Bloom certificate.",
                     IDC_STATIC,171,33,200,40
     LTEXT           "Seed Variety:",IDA_ST11,180,83,82,12
     LTEXT           "Days of Growth:",IDA_ST12,180,97,82,12
@@ -615,18 +615,18 @@ BEGIN
     CTEXT           "Final Confirmation",IDC_ST01,12,11,199,17,SS_SUNKEN
     LTEXT           "Please Note:",IDS_ST01,16,40,86,11
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,5,5,213,127
-    LTEXT           "When you harvest a plant by printing a HighGrow certificate, it's stem will be cut off at the base and the pot prepared with fresh soil for the next seed.",
+    LTEXT           "When you harvest a plant by printing a Bloom certificate, it's stem will be cut off at the base and the pot prepared with fresh soil for the next seed.",
                     IDC_STATIC,16,55,196,28
     ICON            "DLG_ICON",IDC_STATIC,191,32,18,20
     LTEXT           "Enter your Name:",IDS_ST02,17,114,95,12
-    LTEXT           "If a female plant has been pollinated by a male plant, seeds should develop. These seeds will automatically be added to the HighGrow seedlist, but may also be exported to a file.",
+    LTEXT           "If a female plant has been pollinated by a male plant, seeds should develop. These seeds will automatically be added to the Bloom seedlist, but may also be exported to a file.",
                     IDC_STATIC,16,83,192,28
 END
 
 PLANTLOG DIALOGEX 0, 0, 371, 211
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE
-CAPTION "HighGrow Harvested Plants Log"
+CAPTION "Bloom Harvested Plants Log"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LISTBOX         IDG_LB01,12,16,135,186,LBS_SORT | LBS_OWNERDRAWFIXED | 
@@ -663,7 +663,7 @@ STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CONTROL | DS_CENTER | WS_POPUP |
 EXSTYLE WS_EX_TOOLWINDOW
 FONT 8, "MS Sans Serif"
 BEGIN
-    CTEXT           "HighGrow - Legal Marijuana Growing",IDC_ST01,32,8,209,
+    CTEXT           "Bloom - Legal Marijuana Growing",IDC_ST01,32,8,209,
                     13,SS_SUNKEN
     LTEXT           "Calculating Plant Growth...",IDS_ST01,6,31,258,10
     ICON            "DLG_ICON",IDC_STATIC,247,5,21,20
@@ -1044,7 +1044,7 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDM_OBJECTIVES          "HighGrow Objectives"
+    IDM_OBJECTIVES          "Bloom Objectives"
     IDC_TBCOMBO             "Plant Name"
     IDC_TBGRCOMBO           "Grow Room Name"
 END
@@ -1082,7 +1082,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDSERR_DLL_LOAD         "Please re-install this program to ensure that the file \r""%s"" can be found in the current directory !!"
-    IDSERR_COMMENT_LOAD     "This comment cannot be found in the HighGrow Comments Library !!"
+    IDSERR_COMMENT_LOAD     "This comment cannot be found in the Bloom Comments Library !!"
     IDSERR_NAME_SEED        "Please enter any name for your marijuana plant before planting this seed!!"
 END
 
@@ -1371,7 +1371,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_SIT_16              "Don't expect this plant to reach the ceiling, but it should develop well, and produce big buds."
-    IDS_SIT_17              "With excellent hybrid vigour and yield, this plant should grow very well in the HighGrow greenhouse."
+    IDS_SIT_17              "With excellent hybrid vigour and yield, this plant should grow very well in the Bloom greenhouse."
     IDS_SIT_18              "You could easily harvest up to 700 grams of high quality marijuana after approximately 8 to 10 weeks of flowering."
     IDS_SIT_19              "Not a bad choice if you're after a great-looking plant with a good THC content. You could harvest over half a kilo of prime buds here!!"
     IDS_SIT_20              "A great plant, but it will require careful attention to grow as tall as some of the other seeds available here."
@@ -1390,7 +1390,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_CR01                "Please enter your name in the edit field provided.\nThis name (or nickname) will be included on your\nplant's harvest certificate."
-    IDS_CR02                "Thank you for registering this version of HighGrow.\n\nYour plants will now be saved from their untimely death\nand can now be nurtured to the ripe old age of 300 days !!"
+    IDS_CR02                "Thank you for registering this version of Bloom.\n\nYour plants will now be saved from their untimely death\nand can now be nurtured to the ripe old age of 300 days !!"
 END
 
 STRINGTABLE DISCARDABLE 
@@ -1422,7 +1422,7 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_CH01                "HighGrow performs regular date and time checks, and has now detected that today's date is before the date that the program was last started up."
+    IDS_CH01                "Bloom performs regular date and time checks, and has now detected that today's date is before the date that the program was last started up."
 END
 
 #endif    // English (U.S.) resources
@@ -1547,7 +1547,7 @@ END
 ALARMSET DIALOGEX 0, 0, 185, 142
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
-CAPTION "Set or Unset the HighGrow Alarm.."
+CAPTION "Set or Unset the Bloom Alarm.."
 FONT 8, "MS Sans Serif"
 BEGIN
     EDITTEXT        IDC_ROBTEXT,15,80,156,12,ES_AUTOHSCROLL
@@ -1558,9 +1558,9 @@ BEGIN
     COMBOBOX        IDC_CM03,77,114,28,331,CBS_DROPDOWNLIST | WS_TABSTOP
     DEFPUSHBUTTON   "&Set Alarm",IDOK,109,97,62,14
     PUSHBUTTON      "&Unset Alarm",IDCANCEL,109,113,62,14
-    CTEXT           "HighGrow Alarm Clock",IDC_ST01,14,12,159,14,SS_SUNKEN
+    CTEXT           "Bloom Alarm Clock",IDC_ST01,14,12,159,14,SS_SUNKEN
     CONTROL         "",IDC_ST2,"Static",SS_ETCHEDFRAME,7,7,171,127
-    LTEXT           "If you set this alarm clock, Rasta Robbie will\nwhistle and remind you when your time comes.\nNote: This will only work if HighGrow is running.",
+    LTEXT           "If you set this alarm clock, Rasta Robbie will\nwhistle and remind you when your time comes.\nNote: This will only work if Bloom is running.",
                     IDC_STATIC,16,32,155,26
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,15,62,157,1
     CTEXT           "Alarm Set",IDC_ST02,15,97,90,12,SS_SUNKEN
@@ -1585,7 +1585,7 @@ BEGIN
     CTEXT           "Grow Room Music Player",IDC_ST01,11,11,219,14,SS_SUNKEN
     CONTROL         "",IDC_ST2,"Static",SS_ETCHEDFRAME,7,7,229,137
     CTEXT           "Currently Enabled",IDC_ST02,7,150,92,12,SS_SUNKEN
-    LTEXT           "You can now play all your favourite MP3 songs, or a selection of MIDI music files when you enter any HighGrow grow room.",
+    LTEXT           "You can now play all your favourite MP3 songs, or a selection of MIDI music files when you enter any Bloom grow room.",
                     IDC_STATIC,21,31,200,19
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,12,52,219,1
     CTEXT           "Music Files",IDC_ST03,12,59,155,12,SS_SUNKEN
@@ -1612,13 +1612,13 @@ BEGIN
     LTEXT           "Enter the URL for the image file:",IDC_STATIC,16,68,112,
                     10
     EDITTEXT        IDC_ED02,15,96,148,12,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Note: HighGrow only downloads images from a scrambled URL (this improves our security).",
+    LTEXT           "Note: Bloom only downloads images from a scrambled URL (this improves our security).",
                     IDC_STATIC,15,112,145,18
 END
 
 SHAREWARE1 DIALOG DISCARDABLE  0, 0, 186, 70
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "HighGrow Freeware .."
+CAPTION "Bloom Freeware .."
 FONT 8, "MS Sans Serif"
 BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,129,49,50,14

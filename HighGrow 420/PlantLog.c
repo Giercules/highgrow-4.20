@@ -526,7 +526,7 @@ BOOL PGStartPlantLog(HWND hwnd, HINSTANCE hInst)
     if(!GLDoesFileExist((LPSTR)lpLogFile))
         { // tell him if it doesn't
         MessageBox(hwnd, "Harvested Plant Log file not found",
-                   "HighGrow Message", MB_OK|MB_ICONEXCLAMATION);
+                   "Bloom Message", MB_OK|MB_ICONEXCLAMATION);
         return FALSE;
         }
     // now read the file into global memory
@@ -537,8 +537,8 @@ BOOL PGStartPlantLog(HWND hwnd, HINSTANCE hInst)
     if(!iLogPlants)
         { // free the memory, give him a message and getout
         PGPlantLogMemFree();
-        MessageBox(hwnd, "No plants found in the HighGrow Harvested Plant Log",
-                   "HighGrow Message", MB_OK|MB_ICONEXCLAMATION);
+        MessageBox(hwnd, "No plants found in the Bloom Harvested Plant Log",
+                   "Bloom Message", MB_OK|MB_ICONEXCLAMATION);
         return FALSE;
         }
     // now show the plant log dialog

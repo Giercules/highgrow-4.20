@@ -334,7 +334,7 @@ void HIInitHistoryDialog(HWND hDlg, HINSTANCE hInst)
     // to create an image list for the small icons.
     hSmall = ImageList_Create(16, 16, FALSE, 1, 0 );
     // Load the icon and add it to the image list.
-    hIcon = LoadImage(hInst, "HighGrow", IMAGE_ICON, 16, 16, 
+    hIcon = LoadImage(hInst, "HIGHGROW", IMAGE_ICON, 16, 16, 
                       LR_LOADMAP3DCOLORS|LR_LOADTRANSPARENT);
 
     // add our icon

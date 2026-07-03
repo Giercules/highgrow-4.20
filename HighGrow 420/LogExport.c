@@ -23,7 +23,7 @@ static OPENFILENAME ofn ;
 BOOL LEFileSaveDlg (HWND hwnd, LPSTR lpstrFileName)
      {
      char szStartPath[250] = "\0";
-     static char szFilter[] = "HighGrow Growth Log Files (*.log)\0*.log\0" \
+     static char szFilter[] = "Bloom Growth Log Files (*.log)\0*.log\0" \
                               "All Files (*.*)\0*.*\0\0" ;
      // read the name of his startup directory
      REReadRegistryKey("Startup in", (LPCTSTR)szStartPath, 250);
@@ -149,7 +149,7 @@ void LEExportHeadingData(HINSTANCE hInst, LPSTR lpPlantName)
 	char szTemp[150]="\0";
 	char szLineBuf[250]="\0";
     // identify the plant
-    wsprintf(szTemp, "HighGrow Growth Log:  %s\n\n", lpPlantName);
+    wsprintf(szTemp, "Bloom Growth Log:  %s\n\n", lpPlantName);
 	LEWriteLine(szTemp);
     // get the heading line
 	LEGetExportHeadingData(hInst, (char*)&szLineBuf);
@@ -291,7 +291,7 @@ void LEPrintHeader(HDC hdc, HINSTANCE hInst, LPRECT rcPg, LPRECT rcHdr, int* lpT
 	rcHdr->right -= 50;
 
     GetDateFormat(LOCALE_SYSTEM_DEFAULT,0,NULL,"dddd',' dd MMMM yyyy",(LPTSTR)&szDate, 60);
-    wsprintf(szTemp, "HighGrow Growth Log:  %s", lpName);
+    wsprintf(szTemp, "Bloom Growth Log:  %s", lpName);
 	DrawText(hdc, szTemp, -1, rcHdr, DT_SINGLELINE|DT_VCENTER|DT_LEFT);
 	DrawText(hdc, szDate, -1, rcHdr, DT_SINGLELINE|DT_VCENTER|DT_RIGHT);
 	FrameRect(hdc, rcPg, GetStockObject(BLACK_BRUSH));

@@ -283,8 +283,12 @@ void GLDisplayProgress(HWND hDlg, int ID, HBRUSH hBrush, int cur, int max);
 
 // Center the current dialog on the screen.
 void DlgCenter(HWND hDlg);
-// Resizes the dialog inside the HighGrow Program window.
+// Resizes the dialog inside the Bloom program window.
 void GLSizeDialogToFit(HWND hdlg);
+
+// Legacy room/seed file descriptors (HighGrow + Bloom)
+BOOL GLIsGrowroomImageDesc(const char *szDesc);
+BOOL GLIsSeedFileDesc(const char *szDesc);
 
 // Checks to see if the file exists
 BOOL GLDoesFileExist(LPSTR lpPlantFile);

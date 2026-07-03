@@ -38,8 +38,8 @@ echo Compiling resources...
 rc /nologo /l 0x409 /fo"%OUTDIR%\highgrow.res" /d NDEBUG highgrow.RC
 if errorlevel 1 exit /b 1
 
-echo Linking HighGrow.exe...
-link /nologo /subsystem:windows /incremental:no /out:"%OUTDIR%\HighGrow.exe" %LIBS% ^
+echo Linking Bloom.exe...
+link /nologo /subsystem:windows /incremental:no /out:"%OUTDIR%\Bloom.exe" %LIBS% ^
     "%OUTDIR%\activity.obj" "%OUTDIR%\Buds.obj" "%OUTDIR%\Calc.obj" "%OUTDIR%\Chart.obj" ^
     "%OUTDIR%\clock.obj" "%OUTDIR%\Comments.obj" "%OUTDIR%\crypt.obj" "%OUTDIR%\DibAPI.obj" ^
     "%OUTDIR%\DiBitmap.obj" "%OUTDIR%\Global.obj" "%OUTDIR%\GrowEdit.obj" "%OUTDIR%\GrowRoom.obj" ^
@@ -59,6 +59,6 @@ if exist highgrow.chm copy /Y highgrow.chm "%OUTDIR%\" >nul
 if exist "The Garage.hgb" copy /Y "The Garage.hgb" "%OUTDIR%\" >nul
 
 echo.
-echo Build succeeded: %OUTDIR%\HighGrow.exe
-echo Run from the output folder:  cd %OUTDIR% ^&^& HighGrow.exe
+echo Build succeeded: %OUTDIR%\Bloom.exe
+echo Run from the output folder:  cd %OUTDIR% ^&^& Bloom.exe
 exit /b 0

@@ -954,13 +954,13 @@ int ACShowActivitySheet(HWND hWndParent, HINSTANCE hInstance, int iPlant, int iS
 	   psActivityPage[i].dwSize      = sizeof(PROPSHEETPAGE);
 	   psActivityPage[i].dwFlags	 = PSP_USEICONID|PSP_USETITLE;
 	   psActivityPage[i].hInstance	 = hInstance;
-	   psActivityPage[i].pszIcon	 = "HighGrow";
+	   psActivityPage[i].pszIcon	 = "HIGHGROW";
 	   psActivityPage[i].lParam		 = 0;
 	   }
 
 //    psActivityPage[0].pszTemplate = "T_Temp";
 //    psActivityPage[0].pszTitle	  = "Calculated";
-//    psActivityPage[0].pszIcon	  = "HighGrow";
+//    psActivityPage[0].pszIcon	  = "HIGHGROW";
 //    psActivityPage[0].pfnDlgProc  = ACTempDlgProc;
     
     psActivityPage[0].pszTemplate = "T_Stats";
@@ -992,7 +992,7 @@ int ACShowActivitySheet(HWND hWndParent, HINSTANCE hInstance, int iPlant, int iS
 	psActivityHeader.dwFlags      = PSH_USEICONID|PSH_PROPSHEETPAGE;
 	psActivityHeader.hwndParent   = hWndParent;
 	psActivityHeader.hInstance    = hInstance;
-	psActivityHeader.pszIcon      = "HighGrow";
+	psActivityHeader.pszIcon      = "HIGHGROW";
     psActivityHeader.nStartPage   = iSheet;
 	psActivityHeader.pszCaption   = strbuff;
 	psActivityHeader.nPages       = sizeof(psActivityPage)/sizeof(PROPSHEETPAGE);

@@ -1089,4 +1089,18 @@ void GLInitGrowMenus(HWND hwnd)
     }
 
 
+BOOL GLIsGrowroomImageDesc(const char *szDesc)
+    {
+    return (strcmp(szDesc, "HighGrow Growroom Image File") == 0
+         || strcmp(szDesc, "Bloom Growroom Image File") == 0);
+    }
+
+
+BOOL GLIsSeedFileDesc(const char *szDesc)
+    {
+    return (strcmp(szDesc, "HighGrow Marijuana Seed File") == 0
+         || strcmp(szDesc, "Bloom Marijuana Seed File") == 0);
+    }
+
+
 

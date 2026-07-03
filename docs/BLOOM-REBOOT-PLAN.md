@@ -1,6 +1,6 @@
-# HighGrow Reboot — MVP & Phased Roadmap
+# Bloom — MVP & Phased Roadmap
 
-**Goal:** Rebuild HighGrow without Robbie, with appealing modern graphics, gamified progression, and purchasable upgrades — while preserving the core daily grow-room simulation.
+**Goal:** Reboot the classic HighGrow sim as **Bloom** — no Robbie, appealing modern graphics, gamified progression, and purchasable upgrades — while preserving the core daily grow-room simulation.
 
 **North star:** You can run something early, judge look-and-feel, and only then invest in full engine port.
 
@@ -41,7 +41,7 @@ Or open `prototype/index.html` in Chrome/Edge.
 
 ## Phase 1 — Engine Vertical Slice (MVP Core)
 
-**Stack:** Godot 4 (2D) + `highgrow_sim` C++ library (ported `Calc.c`, `NodeCalc.c`, `PlantMem`).
+**Stack:** Godot 4 (2D) + `bloom_sim` C++ library (ported `Calc.c`, `NodeCalc.c`, `PlantMem`).
 
 **Scope — must ship:**
 
@@ -51,7 +51,7 @@ Or open `prototype/index.html` in Chrome/Edge.
 | **Strains** | 4 launch strains (expand to 12 in Phase 2) |
 | **Care** | Visit, water, NPK+Ca, light on/off, light height, basic prune |
 | **Rendering** | Draw-list from `GRCalcDrawNodes` → Godot sprites + stem meshes |
-| **Saves** | `%USERPROFILE%/Documents/HighGrow/saves/` — no registry |
+| **Saves** | `%USERPROFILE%/Documents/Bloom/saves/` — no registry |
 | **Journal** | Context tips from `tips.json` (ported `comments.dll` text) |
 | **Vacation mode** | Auto water/feed/light rules from `GROWROOM` |
 | **Harvest** | Weigh, potency, plant log entry |
@@ -183,11 +183,11 @@ Upgrades are **purchased with Grow Coins** earned in-game. Optional cosmetic IAP
 ## Technical Architecture
 
 ```
-highgrow_sim/          C++ — Calc, NodeCalc, saves (unit tested)
-highgrow_godot/        Godot 4 project — scenes, UI, audio
+bloom_sim/          C++ — Calc, NodeCalc, saves (unit tested)
+bloom_godot/        Godot 4 project — scenes, UI, audio
 content/               strains.json, tips.json, upgrades.json, atlases
 prototype/             Phase 0 browser mock (this repo)
-legacy/                HighGrow 420/ — reference only
+legacy/                HighGrow 420/ — original source tree (reference)
 ```
 
 **Draw pipeline:**
@@ -226,7 +226,7 @@ Sim → PlantState → DrawList (segments, sprites, tints) → Renderer
 
 1. **Run** `prototype/run.bat` and click through a full mock day.
 2. **Note** what feels off (colors, plant size, UI density) — tune prototype first.
-3. **When signed off** → start `highgrow_sim` extraction PR (Calc + NodeCalc tests).
+3. **When signed off** → start `bloom_sim` extraction PR (Calc + NodeCalc tests).
 4. **Parallel** → finalize 2× room background art in prototype assets folder.
 
 ---
@@ -235,7 +235,7 @@ Sim → PlantState → DrawList (segments, sprites, tints) → Renderer
 
 | Legacy file | Reboot role |
 |-------------|-------------|
-| `Calc.c` / `NodeCalc.c` | Port to `highgrow_sim` |
+| `Calc.c` / `NodeCalc.c` | Port to `bloom_sim` |
 | `GrowRoom.c` draw order | Godot layer + draw list |
 | `Global.h` structs | Sim API contract |
 | `activity.c` | Replaced by care dashboard |

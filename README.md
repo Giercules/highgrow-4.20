@@ -1,23 +1,25 @@
-# HighGrow 4.20
+# Bloom
 
-Source code of the original Windows cannabis grow simulator, developed by my close friend.
+A modern reboot of the classic Windows cannabis grow simulator (originally **HighGrow 4.20**), developed by my close friend.
 
-<img width="800" height="600" alt="HighGrow screenshot" src="https://github.com/user-attachments/assets/8f1bd1b3-46b7-4c1e-910f-471ea746a03d" />
+<img width="800" height="600" alt="Bloom screenshot" src="https://github.com/user-attachments/assets/8f1bd1b3-46b7-4c1e-910f-471ea746a03d" />
 
 ## About this fork
 
-This repository is a fork of [mikebyrne3280-code/highgrow-4.20](https://github.com/mikebyrne3280-code/highgrow-4.20). The `feature/modern-build` branch adds tooling and fixes so the game builds and runs on modern Windows with current Visual Studio Build Tools.
+This repository is a fork of [mikebyrne3280-code/highgrow-4.20](https://github.com/mikebyrne3280-code/highgrow-4.20). The `feature/modern-build` branch renames the game **Bloom**, adds modern build tooling, and lays groundwork for the full reboot (see [`docs/BLOOM-REBOOT-PLAN.md`](docs/BLOOM-REBOOT-PLAN.md)).
 
 Changes on `feature/modern-build`:
 
 | Area | What changed |
 |------|----------------|
+| **Rebrand** | User-facing name **Bloom**; builds `Bloom.exe` (legacy `.hgp` / room images still load) |
 | **Build** | `HighGrow 420/build.bat` and `run.bat` — no legacy VC6 project required |
 | **MFC removal** | `Picture.cpp/h`, `JPGView.cpp`, `StdAfx.h` — Win32 + OLE `IPicture` instead of MFC/ATL |
 | **SDK conflict** | `DIBAPI.H` — renamed `PrintWindow` → `DIBPrintWindow` |
 | **Stale include** | `Internet.c` — removed obsolete `iostream.h` |
 | **Date bug** | `Global.c` — fixed `GLPreviousDate` month handling (1–12 ↔ `tm_mon`) |
 | **Test mode** | `Calc.c/h`, `highgrow.C/H` — `/T` and `/T:nnn` fast-forward growth for dev/testing |
+| **Prototype** | `prototype/` — browser mock for Bloom look-and-feel (Phase 0) |
 | **Git** | `.gitignore` — ignores build output (`WinRel/`), saves (`*.hgp`, `*.hgg`), and object files |
 
 Upstream PR: [mikebyrne3280-code/highgrow-4.20#1](https://github.com/mikebyrne3280-code/highgrow-4.20/pull/1)
@@ -39,7 +41,7 @@ build.bat
 
 On success, the executable and runtime files are written to `HighGrow 420/WinRel/`:
 
-- `HighGrow.exe`
+- `Bloom.exe`
 - `Robbie.dll`, `comments.dll`
 - `highgrow.chm`, `The Garage.hgb` (if present in the source folder)
 
@@ -54,7 +56,7 @@ Or launch directly:
 
 ```bat
 cd "HighGrow 420\WinRel"
-HighGrow.exe
+Bloom.exe
 ```
 
 Plant save files (`Plant01.hgp`, etc.) are stored in the app's **startup directory** (see *Options → Startup in* in the game). That directory is often the repo parent folder, not necessarily `WinRel/`.
@@ -68,11 +70,11 @@ run.bat /T          REM auto target (flowering stage)
 run.bat /T:220      REM fast-forward to grow day 220
 ```
 
-If HighGrow is already running, close it before re-running `/T`, or the new instance will forward the command to the existing window.
+If Bloom is already running, close it before re-running `/T`, or the new instance will forward the command to the existing window.
 
 ## Registration notes
 
-The title bar shows **Freeware Version 4.20** — that is product branding, not an “unregistered” flag.
+The legacy title bar referenced **Freeware Version 4.20** — that was original product branding, not an “unregistered” flag.
 
 In this source tree, `gbRegistered` and `gbPaid` default to `TRUE` in `Global.c`, so the 60-day trial limit and paid-feature gates are off for local builds. The original registration UI is largely commented out in 4.20.
 
@@ -80,10 +82,10 @@ In this source tree, `gbRegistered` and `gbPaid` default to `TRUE` in `Global.c`
 
 | Path | Description |
 |------|-------------|
-| `HighGrow 420/` | Application source, resources, and build scripts |
+| `HighGrow 420/` | Legacy application source (original HighGrow 4.20 tree) |
 | `HighGrow 420/WinRel/` | Build output (gitignored; created by `build.bat`) |
-| `HighGrow 420/build.bat` | Compile and link with MSVC |
-| `HighGrow 420/run.bat` | Launch from `WinRel/` with optional command-line args |
+| `prototype/` | Bloom Phase 0 visual prototype (browser) |
+| `docs/BLOOM-REBOOT-PLAN.md` | MVP and phased reboot roadmap |
 
 ## Remotes
 

@@ -88,7 +88,7 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
           giTestGrowDay = atoi(lpDay + 3);
       }
   // now check if we're already running
-  hCheckWnd = FindWindow("HighGrow", NULL);
+  hCheckWnd = FindWindow("Bloom", NULL);
   if(hCheckWnd)
       {  // if we're already running
       // first check and change to this program's original startup directory
@@ -99,7 +99,8 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
       if(bTestGrowEnabled)
           PostMessage(hCheckWnd, WM_HG_TESTGROW, (WPARAM)giTestGrowDay, 0);
       // now we'll attempt to download the image
-      if(strncmp(lpCommandLine, "highgrow://", 11)==0)
+      if(strncmp(lpCommandLine, "highgrow://", 11)==0
+      || strncmp(lpCommandLine, "bloom://", 8)==0)
           { // start the file download and encryption immediately
           INGetInternetRoomImageFile(hCheckWnd, hInstance, gszCommandLine);
           }
@@ -117,12 +118,12 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
     wc.hCursor       = LoadCursor (NULL, IDC_ARROW);
     wc.hbrBackground = GetStockObject (WHITE_BRUSH);
     wc.lpszMenuName  = (LPCTSTR) "Menu";
-    wc.lpszClassName = (LPCTSTR) "HighGrow";
+    wc.lpszClassName = (LPCTSTR) "Bloom";
 
     if(!RegisterClass (&wc))
         {
         MessageBox(NULL, "RegisterClass() function failed", 
-                   "HighGrow", MB_OK | MB_ICONEXCLAMATION);
+                   "Bloom", MB_OK | MB_ICONEXCLAMATION);
         return FALSE;
         }
 
@@ -155,7 +156,7 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
    if(strstr(lpCommandLine,"/g")!=0)
       bAutoGrowEnabled = TRUE;
 
-   if(!(ghwndMain = CreateWindowEx (0L, "HighGrow", NULL,
+   if(!(ghwndMain = CreateWindowEx (0L, "Bloom", NULL,
                                     WS_BORDER|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX,
                                     (GetSystemMetrics(SM_CXSCREEN)-640)/2,
                                     (GetSystemMetrics(SM_CYSCREEN)-480)/2,
@@ -187,7 +188,7 @@ void HGSetWindowCaption(HWND hwnd)
     char strbuff[150];
 
     GetDateFormat(LOCALE_SYSTEM_DEFAULT,0,NULL,"dddd',' dd MMMM yyyy",(LPTSTR)&strdate, 60);
-    sprintf(strbuff, "HighGrow (Freeware Version 4.20) - %s", strdate);
+    sprintf(strbuff, "Bloom - %s", strdate);
 
     SetWindowText(hwnd, strbuff);
     }
@@ -657,7 +658,7 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
          if(bAutoLoad)  HGCreateModelessDialog(hwnd, ghInst);
          srand((unsigned)time(NULL)); // initialize random number generation
          // add the icon to the system tray
-         TRTaskBarAddIcon(hwnd, ghInst, "HighGrow - Legal Marijuana Growing");
+         TRTaskBarAddIcon(hwnd, ghInst, "Bloom - Grow Room Simulator");
          // before calculating, check if godmode password is set
 //         PACheckGodMode();
          // now check and change to this program's original startup directory
@@ -734,6 +735,7 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
              }
          // now we check if our path includes the http:// or highgrow:// protocols
          if((strncmp(gszCommandLine, "highgrow://", 11)==0)||
+            (strncmp(gszCommandLine, "bloom://", 8)==0)||
             (strncmp(gszCommandLine, "http://",      7)==0))
              { // start the file download and encryption immediately
              INGetInternetRoomImageFile(hwnd, ghInst, gszCommandLine);

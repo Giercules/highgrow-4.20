@@ -24,7 +24,7 @@ void RESaveRegistryKey(LPCTSTR lpKeyName, LPCTSTR lpKeyValue)
      RegOpenKeyEx(HKEY_CURRENT_USER, "Software", 0, KEY_ALL_ACCESS, &hkMain);
      RegCreateKeyEx(hkMain, "Slick Software", 0, "", REG_OPTION_NON_VOLATILE, 
                     KEY_ALL_ACCESS, NULL, &hkAuthor, &dwDisp);
-     RegCreateKeyEx(hkAuthor, "HighGrow", 0, "", REG_OPTION_NON_VOLATILE, 
+     RegCreateKeyEx(hkAuthor, "Bloom", 0, "", REG_OPTION_NON_VOLATILE, 
                     KEY_ALL_ACCESS, NULL, &hkProgram, &dwDisp);
      RegSetValueEx(hkProgram, lpKeyName, 0, REG_SZ, 
                     (CONST BYTE*)lpKeyValue, lstrlen(lpKeyValue)+1);
@@ -51,7 +51,7 @@ void REReadRegistryKey(LPCTSTR lpKeyName, LPTSTR lpValueBuff, int iBuffLen)
      // first open the current user's key and create/open the slick software key
      RegOpenKeyEx(HKEY_CURRENT_USER, "Software", 0, KEY_QUERY_VALUE, &hkMain);
      RegOpenKeyEx(hkMain, "Slick Software", 0, KEY_QUERY_VALUE, &hkAuthor);
-     RegOpenKeyEx(hkAuthor, "HighGrow", 0, KEY_QUERY_VALUE, &hkProgram);
+     RegOpenKeyEx(hkAuthor, "Bloom", 0, KEY_QUERY_VALUE, &hkProgram);
      RegQueryValueEx(hkProgram, lpKeyName, 0, (LPDWORD)NULL, lpValueBuff, pValueLen);
      // close all the registry keys again
      RegCloseKey(hkProgram);     
@@ -65,8 +65,8 @@ void REReadRegistryKey(LPCTSTR lpKeyName, LPTSTR lpValueBuff, int iBuffLen)
 \******************************************************************************/
 
 void RESetProgramAutoLoad(BOOL bSetKey)
-     { // sets or deletes the HighGrow auto-load registry entry
-     // HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Run/HighGrow
+     { // sets or deletes the Bloom auto-load registry entry
+     // HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Run/Bloom
      HKEY  hkMain;
      HKEY  hkKey1, hkKey2, hkKey3, hkKey4;
      char szCommandLine[MAX_PATH]="\0";
@@ -83,11 +83,11 @@ void RESetProgramAutoLoad(BOOL bSetKey)
      if(bSetKey)
          {
 //         Blow(szCommandLine);
-         RegSetValueEx(hkKey4, "HighGrow", 0, REG_SZ, 
+         RegSetValueEx(hkKey4, "Bloom", 0, REG_SZ, 
                       (CONST BYTE*)szCommandLine, lstrlen(szCommandLine)+1);
          }
      else // if we're unsetting it, we must delete it
-         RegDeleteValue(hkKey4, "HighGrow");
+         RegDeleteValue(hkKey4, "Bloom");
      // close all the registry keys again
      RegCloseKey(hkKey4);     
      RegCloseKey(hkKey3);     

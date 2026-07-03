@@ -108,5 +108,5 @@ loop();
 
 window.addEventListener('resize', () => {});
 
-console.log('HighGrow Reboot prototype — Phase 0');
+console.log('Bloom visual prototype — Phase 0');
 console.log('Use care buttons + shop to validate game feel.');

@@ -127,7 +127,7 @@ UINT CRWritePrivateHeader(int iFileHandle, DWORD dwFileSize, BOOL bSecure)
     {
     ROOMIMAGEFILEHEADERSTRUCT ri;
     // --- Prepare the file header info
-    strcpy(ri.szFileDesc, "HighGrow Growroom Image File");
+    strcpy(ri.szFileDesc, "Bloom Growroom Image File");
     strcpy(ri.szFileBluff, "BMP");
     ri.dwBitmapSize = dwFileSize;
     // if bSecure flag is set, we include the serial number in the header
@@ -238,7 +238,7 @@ BOOL CRUpgradePrivateFileHeader(int hFile, DWORD dwsize)
     // --- Read the file header into the struct
     _lread(hFile, (LPSTR)&ri, sizeof(ROOMIMAGEFILEHEADERSTRUCT));
     // --- Prepare the file header info
-    if(strcmp(ri.szFileDesc, "HighGrow Growroom Image File") != 0)
+    if(!GLIsGrowroomImageDesc(ri.szFileDesc))
         return FALSE;
     if(strcmp(ri.szFileBluff, "BMP")  != 0)
         return FALSE;
@@ -267,7 +267,7 @@ BOOL CRCheckPrivateHeader(int iFileHandle, DWORD dwsize, BOOL bSecure)
     // --- Read the file header into the struct
     _lread(iFileHandle, (LPSTR)&ri, sizeof(ROOMIMAGEFILEHEADERSTRUCT));
     // --- Prepare the file header info
-    if(strcmp(ri.szFileDesc, "HighGrow Growroom Image File") != 0)
+    if(!GLIsGrowroomImageDesc(ri.szFileDesc))
         return FALSE;
     if(strcmp(ri.szFileBluff, "BMP")  != 0)
         return FALSE;

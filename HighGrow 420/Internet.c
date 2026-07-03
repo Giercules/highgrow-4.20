@@ -238,7 +238,7 @@ BOOL INGetInternetFile(HWND hwnd, HINSTANCE hInst,
     char szLogRequest[50];
     // -----
     // now we can open our internet session
-    hSession = InternetOpen("HighGrow Grow Room Image Download",
+    hSession = InternetOpen("Bloom Grow Room Image Download",
                             INTERNET_OPEN_TYPE_PRECONFIG,
                             NULL, NULL, 0);
     
@@ -444,7 +444,7 @@ BOOL INGetInternetRoomImageFile(HWND hwnd, HINSTANCE hInst, char *szFileURL)
     else
         {
         MessageBox(hwnd, 
-                  "Unable to Download the Requested Grow Room Image File\nfrom the HighGrow web-site.",
+                  "Unable to Download the Requested Grow Room Image File\nfrom the Bloom web-site.",
                   "Download Problem Encountered", MB_OK);
         }
     return breturn;

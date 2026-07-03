@@ -728,7 +728,7 @@ void CHPrintHeader(HDC hdc, HINSTANCE hInst, LPRECT rcPg, LPRECT rcHdr)
     rcHdr->right -= 50;
 
     GetDateFormat(LOCALE_SYSTEM_DEFAULT,0,NULL,"dddd',' dd MMMM yyyy",(LPTSTR)&szDate, 60);
-    DrawText(hdc, "HighGrow Growth Chart", -1, rcHdr, DT_SINGLELINE|DT_VCENTER|DT_LEFT);
+    DrawText(hdc, "Bloom Growth Chart", -1, rcHdr, DT_SINGLELINE|DT_VCENTER|DT_LEFT);
     DrawText(hdc, szDate, -1, rcHdr, DT_SINGLELINE|DT_VCENTER|DT_RIGHT);
     FrameRect(hdc, rcPg, GetStockObject(BLACK_BRUSH));
     }

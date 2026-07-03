@@ -145,7 +145,7 @@ static OPENFILENAME ofnSeed ;
 BOOL SIFileSaveDlg (HWND hwnd, LPSTR lpstrFileName)
      {
      char szStartPath[250] = "\0";
-     static char szFilter[] = "HighGrow Seed Files (*.hgs)\0*.hgs\0\0";
+     static char szFilter[] = "Bloom Seed Files (*.hgs)\0*.hgs\0\0";
      // read the name of his startup directory
      REReadRegistryKey("Startup in", (LPCTSTR)szStartPath, 250);
      // now fill the OPENFILENAME struct elements
@@ -205,7 +205,7 @@ BOOL SINewSeedFile(HWND hWnd,
     // first we must lock the memory
     P_FSeed = (PFILESEED)GlobalLock(hSeedMem);
     // now we can initialize this seed's info
-    strcpy(P_FSeed->szFileType, "HighGrow Marijuana Seed File");
+    strcpy(P_FSeed->szFileType, "Bloom Marijuana Seed File");
     strcpy(P_FSeed->szFileVersion, "3.00");
     // first copy the text-based Struct elements
     strcpy(P_FSeed->szGrowerName,  szGrowerName);
@@ -454,7 +454,7 @@ BOOL SISaveBreedDialog(HWND hwnd, PPLANTSEED PPS_Seed, HINSTANCE hInst)
     // now we'll check if the name already exists for this hybrid
     if(SGDoesHybridNameExist(hInst, szSeedVariety))
         {
-        MessageBox(hwnd, "The HighGrow Seed List already has a Hybrid with this name!", 
+        MessageBox(hwnd, "The Bloom Seed List already has a Hybrid with this name!", 
                          lpCaption, MB_OK|MB_ICONEXCLAMATION);
         SetFocus(GetDlgItem(hwnd, IDC_ED01));
         return FALSE;
@@ -493,16 +493,16 @@ BOOL SISaveBreedDialog(HWND hwnd, PPLANTSEED PPS_Seed, HINSTANCE hInst)
     if(gbPaid) 
         {
         i = MessageBox(hwnd, "New seed successfully Imported into the Seedlist\n\
-Would you like to Export it as a HighGrow Seedfile?", 
+Would you like to Export it as a Bloom Seedfile?", 
                          "Export This Seed?", MB_YESNO|MB_ICONQUESTION);
         if(i ==IDYES)
             {
             if(SINewSeedFile(hwnd, PPS_Seed, szGrowerName, szSeedVariety,
                              szSeedOrigin,    szSeedDescr,  szSeedHint))
-                MessageBox(hwnd, "HighGrow Seedfile Created Successfully!", 
+                MessageBox(hwnd, "Bloom Seedfile Created Successfully!", 
                                 "Seed Exported", MB_OK);
             else
-                MessageBox(hwnd, "HighGrow Seedfile Not Created!", 
+                MessageBox(hwnd, "Bloom Seedfile Not Created!", 
                                  "Seed Not Exported", MB_OK);
             }
         }
@@ -615,7 +615,7 @@ static OPENFILENAME ofnImport;
 BOOL SIFileOpenDlg(HWND hwnd, LPSTR lpstrFileName)
      {
      char szStartPath[250] = "\0";
-     static char szFilter[] = "HighGrow Seed Files (*.hgs)\0*.hgs\0\0";
+     static char szFilter[] = "Bloom Seed Files (*.hgs)\0*.hgs\0\0";
      // read the name of his startup directory
      REReadRegistryKey("Startup in", (LPCTSTR)szStartPath, 250);
      // now fill the OPENFILENAME struct elements
@@ -678,8 +678,8 @@ BOOL SIImportSeedFile(HWND hWnd, HINSTANCE hInst)
         // it matches, so now check if we already have this seed in our list
         if(SGDoesHybridNameExist(hInst, P_FSeed->szSeedVariety))
             {
-            MessageBox(hWnd, "The HighGrow Seed List already has a Hybrid with this name!", 
-                             "HighGrow Seed Import", MB_OK|MB_ICONEXCLAMATION);
+            MessageBox(hWnd, "The Bloom Seed List already has a Hybrid with this name!", 
+                             "Bloom Seed Import", MB_OK|MB_ICONEXCLAMATION);
 
             }
         else
@@ -690,7 +690,7 @@ BOOL SIImportSeedFile(HWND hWnd, HINSTANCE hInst)
                                   P_FSeed->szSeedDescr,   P_FSeed->szSeedHint))
                 {
                 MessageBox(hWnd, "New seed successfully Imported into the Seedlist!", 
-                                 "HighGrow Seed Import", MB_OK|MB_ICONEXCLAMATION);
+                                 "Bloom Seed Import", MB_OK|MB_ICONEXCLAMATION);
                 bSuccess = TRUE;
                 }
             else
@@ -700,7 +700,7 @@ BOOL SIImportSeedFile(HWND hWnd, HINSTANCE hInst)
         }
     else 
         {
-        MessageBox(hWnd, "This is an Invalid HighGrow Seed File!",
+        MessageBox(hWnd, "This is an Invalid Bloom Seed File!",
                          "Error Encountered", MB_OK|MB_ICONEXCLAMATION);
         }
     // finally we can unlock our memory again
@@ -729,7 +729,7 @@ BOOL SIExportSeedFile(HWND hwnd, HINSTANCE hInst, int iSeed)
     if(iSeed<30)
         {
         MessageBox(hwnd, "You may only export the seeds which you have\nadded \
-to the HighGrow Seedlist yourself (either\nby breeding them or by importing them).",
+to the Bloom Seedlist yourself (either\nby breeding them or by importing them).",
                          "Unable to Export this Seed", MB_OK|MB_ICONEXCLAMATION);
         return FALSE;
         }
@@ -741,12 +741,12 @@ to the HighGrow Seedlist yourself (either\nby breeding them or by importing them
     // now try to save the details to a seed file, reporting our success
     if(SINewSeedFile(hwnd, &PS_ExpSeed, strbuf, szType, szOrig, szDesc, szHint))
         {
-        MessageBox(hwnd, "The HighGrow Seedfile was created successfully!", 
+        MessageBox(hwnd, "The Bloom Seedfile was created successfully!", 
                          "Seed Exported", MB_OK|MB_ICONEXCLAMATION);
         return TRUE;
         }
     else
-        MessageBox(hwnd, "Could not create the HighGrow Seedfile for this seed!", 
+        MessageBox(hwnd, "Could not create the Bloom Seedfile for this seed!", 
                          "Seed Not Exported", MB_OK|MB_ICONEXCLAMATION);
     return FALSE;
     }

@@ -1,4 +1,4 @@
-# HighGrow Reboot — Phase 0 Prototype
+# Bloom — Phase 0 Prototype
 
 Runnable **look-and-feel** mock before the Godot + sim port. No build step.
 
@@ -27,4 +27,4 @@ Then open http://localhost:3000
 
 ## Sign-off checklist
 
-See `docs/HIGHGROW-REBOOT-PLAN.md` → Phase 0 exit criteria.
+See `docs/BLOOM-REBOOT-PLAN.md` → Phase 0 exit criteria.

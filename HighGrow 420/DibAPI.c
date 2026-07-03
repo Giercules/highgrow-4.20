@@ -1818,7 +1818,7 @@ UINT DIWritePrivateHeader(int iFileHandle)
     {
     ROOMIMAGEFILEHEADER ri;
     // --- Prepare the file header info
-    strcpy(ri.szFileDesc, "HighGrow Growroom Image File");
+    strcpy(ri.szFileDesc, "Bloom Growroom Image File");
     strcpy(ri.szFileDate, "JPG");
     ri.dwBitmapSize = (DWORD)(filelength(iFileHandle)/4*5)-12345;
     ri.dwRegCode    = GetDiskDriveIDNumber();
@@ -1830,7 +1830,7 @@ UINT DIWritePublicHeader(int iFileHandle)
     {
     ROOMIMAGEFILEHEADER ri;
     // --- Prepare the file header info
-    strcpy(ri.szFileDesc, "HighGrow Growroom Image File");
+    strcpy(ri.szFileDesc, "Bloom Growroom Image File");
     strcpy(ri.szFileDate, "GPJ");
     ri.dwBitmapSize = (DWORD)(filelength(iFileHandle)/4*5)-12345;
     ri.dwRegCode    = 1234554321;
@@ -1851,7 +1851,7 @@ BOOL DICheckPrivateHeader(int iFileHandle)
     // --- Read the file header into the struct
     _lread(iFileHandle, (LPSTR)&ri, sizeof(ROOMIMAGEFILEHEADER));
     // --- Prepare the file header info
-    if(strcmp(ri.szFileDesc, "HighGrow Growroom Image File") != 0)
+    if(!GLIsGrowroomImageDesc(ri.szFileDesc))
         return FALSE;
     if(strcmp(ri.szFileDate, "JPG")  != 0)
         return FALSE;
@@ -1870,7 +1870,7 @@ BOOL DICheckPublicHeader(int iFileHandle)
     // --- Read the file header into the struct
     _lread(iFileHandle, (LPSTR)&ri, sizeof(ROOMIMAGEFILEHEADER));
     // --- Prepare the file header info
-    if(strcmp(ri.szFileDesc, "HighGrow Growroom Image File") != 0)
+    if(!GLIsGrowroomImageDesc(ri.szFileDesc))
         return FALSE;
     if((strcmp(ri.szFileDate, "ABC")!=0)&&
        (strcmp(ri.szFileDate, "GPJ")!=0))

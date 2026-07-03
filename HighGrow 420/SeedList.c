@@ -200,7 +200,7 @@ void SLPlantSelectedSeed(HWND hDlg, HINSTANCE hInst)
         { // tell him to enter a name first, and then getout
         char szError[100];
         LoadString(hInst, IDSERR_NAME_SEED, szError, 100);
-        MessageBox(hDlg, szError, "HighGrow Message", MB_OK);
+        MessageBox(hDlg, szError, "Bloom Message", MB_OK);
         // set the focus back to the edit control to help him
         SetFocus(GetDlgItem(hDlg, IDC_ED01));
         return;
@@ -210,7 +210,7 @@ void SLPlantSelectedSeed(HWND hDlg, HINSTANCE hInst)
     if(iPlant==0)
         { // tell him to enter a name first, and then getout
         MessageBox(hDlg, "You already have a seed planted in this pot.", 
-                         "HighGrow Message", MB_OK);
+                         "Bloom Message", MB_OK);
         // set the focus back to the edit control to help him
         SetFocus(GetDlgItem(hDlg, IDC_ED01));
         return;
