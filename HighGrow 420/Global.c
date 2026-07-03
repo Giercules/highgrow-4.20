@@ -379,7 +379,7 @@ BOOL GLPreviousDate(char *szDateBuf, int dayoffset)
     then=*localtime(&now);
  
     then.tm_mday=szDateBuf[0];
-    then.tm_mon=szDateBuf[1];
+    then.tm_mon=szDateBuf[1]-1;
     then.tm_year=szDateBuf[2];
     
     if(dayoffset>0)
@@ -388,7 +388,7 @@ BOOL GLPreviousDate(char *szDateBuf, int dayoffset)
     mktime(&then);
 
     szDateBuf[0]=then.tm_mday;
-    szDateBuf[1]=then.tm_mon;
+    szDateBuf[1]=then.tm_mon+1;
     szDateBuf[2]=then.tm_year;
 
     return TRUE;

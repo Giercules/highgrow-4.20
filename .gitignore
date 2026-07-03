@@ -1,0 +1,26 @@
+# Build output
+HighGrow 420/WinRel/
+HighGrow 420/highgrow/
+HighGrow 420/WinDebug/
+
+# Compiler artifacts
+*.obj
+*.pch
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.sbr
+*.idb
+*.res
+~VC*.tmp
+
+# Local game save data
+*.hgp
+*.hgg
+
+# Editor / tooling
+HighGrow 420/terminals/
+.vs/
+*.user
+*.suo

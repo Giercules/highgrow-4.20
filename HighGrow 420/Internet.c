@@ -1,6 +1,5 @@
 #include<windows.h>
 #include<wininet.h>
-#include<iostream.h>
 #include "resource.h"
 #include "dibitmap.h"  
 #include "global.h"  

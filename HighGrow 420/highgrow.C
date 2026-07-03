@@ -35,17 +35,21 @@
 #include "jpgview.h"
 #include "internet.h"
 #include "seedimp.h"    // **** only required for testing seed exporting ****
+#include "registry.h"
     
 /******************************************************************************\
 *  GLOBAL VARS: For this file only
 \******************************************************************************/
 
 #define HG_CHECKTIMER 101 // id of our conditions checking timer
+#define WM_HG_TESTGROW  (WM_USER + 500)
 
 HANDLE hAccel=0;
 
 BOOL bAutoLoadEnabled=FALSE; // set if \A is found on the command line
 BOOL bAutoGrowEnabled=FALSE; // set if \G is found on the command line
+BOOL bTestGrowEnabled=FALSE; // set if /T is found on the command line
+int  giTestGrowDay=0;        // optional target day from /T:nnn (0 = auto)
 
 char gszCommandLine[MAX_PATH];
          
@@ -75,6 +79,14 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
    // here we copy the command line so that we can adjust and check it
    strcpy(lpCommandLine, lpCmdLine); // copy command line string
    _strlwr(lpCommandLine);        // and lowercase it (for comparisons)
+   // check if /T test-growth simulation switch was found on command line
+   if(strstr(lpCommandLine,"/t")!=0)
+      {
+      char* lpDay = strstr(lpCommandLine, "/t:");
+      bTestGrowEnabled = TRUE;
+      if(lpDay)
+          giTestGrowDay = atoi(lpDay + 3);
+      }
   // now check if we're already running
   hCheckWnd = FindWindow("HighGrow", NULL);
   if(hCheckWnd)
@@ -84,6 +96,8 @@ int PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
       // now we show the window & reset the focus
       ShowWindow(hCheckWnd, SW_SHOWNORMAL);
       SetForegroundWindow(hCheckWnd);
+      if(bTestGrowEnabled)
+          PostMessage(hCheckWnd, WM_HG_TESTGROW, (WPARAM)giTestGrowDay, 0);
       // now we'll attempt to download the image
       if(strncmp(lpCommandLine, "highgrow://", 11)==0)
           { // start the file download and encryption immediately
@@ -360,6 +374,50 @@ int HGCalculatePlants(HWND hWnd, HINSTANCE hInst, BOOL bVisible)
 
 
 /******************************************************************************\
+*  SIMULATE FULL GROWTH ON EXISTING PLANTS (TEST MODE)
+\******************************************************************************/
+
+int HGSimulateTestPlants(HWND hWnd, HINSTANCE hInst, int iTargetDay)
+    {
+    int i, iSimulated = 0;
+    char szFile[256] = "\0";
+    char szKeyVal[20];
+
+    for(i = 0; i < 3; i++)
+        {
+        sprintf(szFile, "Plant%02i.hgp", i + 1);
+        if(!GLDoesFileExist(szFile))
+            continue;
+
+        if(PMPlantFileToMem(i))
+            {
+            P_Plant = (PPLANT)GlobalLock(hPlantMem);
+            PSInitPlantSeeds(i, P_Plant->PI_Plant.cSeedChoice - 1);
+            if(CASimulateFullGrowth((PPLANT)P_Plant, i, iTargetDay))
+                {
+                SLInitPlantSeed((PPLANT)P_Plant, i);
+                SLUpdatePlantSeedGrowthStage((PPLANT)P_Plant, i);
+                giOldestGrowDay = max(giOldestGrowDay, giGrowDay);
+                iSimulated += 1;
+                }
+            GlobalUnlock(hPlantMem);
+            PMPlantMemToFile(i);
+            }
+        }
+
+    if(iSimulated > 0)
+        {
+        wsprintf(szKeyVal, "%i", giOldestGrowDay);
+        RESaveRegistryKey("Oldest Plant GrowDay", szKeyVal);
+        wsprintf(szKeyVal, "%i", GLGetSecsSinceMidnight());
+        RESaveRegistryKey("Seconds Elapsed", szKeyVal);
+        }
+
+    return iSimulated;
+    }
+
+
+/******************************************************************************\
 *
 *  FUNCTION:    DoCommand (handles windows command messages)
 *
@@ -580,6 +638,16 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 
   switch (message)
     {
+    case WM_HG_TESTGROW:
+         HGSimulateTestPlants(hwnd, ghInst, (int)wParam);
+         TBUpdateGrowroomCombo();
+         TBUpdatePlantCombo();
+         GLInitGrowMenus(hwnd);
+         GRInitGrowRoomDrawPlants();
+         GRReRenderGrowRoom();
+         InvalidateRect(hwnd, NULL, TRUE);
+    return 0;
+
     case WM_CREATE:
          // first check how we've been started up (ie AutoLoad?)
          bAutoLoad = (PACheckAutoLoad() & bAutoLoadEnabled);
@@ -619,8 +687,14 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
              UpdateWindow(hwnd); // ensured immediate painting
              }
 //       GLInitGrowroomInfo();
-         // now that we're in the correct directory, calculate our plants
-         HGCalculatePlants(hwnd, ghInst, !bAutoLoad);
+         // optional test mode: fast-forward plants 1-3 with ideal care
+         if(bTestGrowEnabled)
+             {
+             HGSimulateTestPlants(hwnd, ghInst, giTestGrowDay);
+             GRInitGrowRoomDrawPlants();
+             }
+         else
+             HGCalculatePlants(hwnd, ghInst, !bAutoLoad);
 //         iLastCalcedSecs = 0; 
          // now we check if he's got a password, or
          // if he's cheated in any way

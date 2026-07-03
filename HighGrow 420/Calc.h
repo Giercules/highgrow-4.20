@@ -8,6 +8,7 @@
 extern char PlantHealthWeeks[gMaxWeeks+1]; // Ideal health in % per week ending 
 
 BOOL CACalculatePlant(PPLANT plPlant, int iPlant);
+BOOL CASimulateFullGrowth(PPLANT plPlant, int iPlant, int iTargetDay);
 
 // temperature calculations
 extern int giRoomTemp; // current temperature (as calculated every 15 minutes

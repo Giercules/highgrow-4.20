@@ -1006,4 +1006,122 @@ BOOL CACalculatePlant(PPLANT plPlant, int iPlant)
     }     
 
 
+/******************************************************************************\
+*  TEST MODE: APPLY IDEAL DAILY CARE FOR GROWTH SIMULATION
+\******************************************************************************/
+
+static void CAInitDefaultGrowDays(PPLANT plPlant)
+    {
+    memset(plPlant->GD_Plant, 0, sizeof(plPlant->GD_Plant));
+    plPlant->GD_Plant[0].bVisited     = TRUE;
+    plPlant->GD_Plant[0].cLightOn     = 28;
+    plPlant->GD_Plant[0].cLightOff    = 88;
+    plPlant->GD_Plant[0].cLightHeight = 17;
+    plPlant->GD_Plant[0].cSoilPH      = 70;
+    plPlant->GD_Plant[0].iMoisture    = 800;
+    plPlant->GD_Plant[0].cHealth      = 70;
+    }
+
+static void CAApplyIdealGrowDay(PPLANT plPlant, int iPlant, int iDay)
+    {
+    PGROWDAY gd = &plPlant->GD_Plant[iDay];
+    int iRoom = iPlant / 3;
+    int iHeight;
+    int i;
+
+    gd->cLightOn = 28;
+    if(iDay >= PS_Plant[iPlant].szGrowthStageDay[4])
+        gd->cLightOff = 76;  // 12-hour photoperiod during flowering
+    else
+        gd->cLightOff = 88;  // 15-hour photoperiod during vegetative growth
+
+    if(iDay > 0)
+        {
+        gd->iMoisture = plPlant->GD_Plant[iDay - 1].iMoisture;
+        gd->cSoilPH   = plPlant->GD_Plant[iDay - 1].cSoilPH;
+        for(i = 0; i < 4; i++)
+            gd->szNutrients[i] = plPlant->GD_Plant[iDay - 1].szNutrients[i];
+        }
+    else
+        {
+        gd->iMoisture = 500;
+        gd->cSoilPH   = 70;
+        }
+
+    iHeight = (iDay > 0) ? plPlant->GD_Plant[iDay - 1].iHeight : 0;
+    gd->cLightHeight = (char)min(20, max(8, (iHeight + giCurPlantPotOfs + 50) / 125));
+
+    if(GR_Room[iRoom].iLampStrength < 3)
+        GR_Room[iRoom].iLampStrength = 3;
+    if(GR_Room[iRoom].iLampType == 0)
+        GR_Room[iRoom].iLampType = 1;
+    }
+
+
+BOOL CASimulateFullGrowth(PPLANT plPlant, int iPlant, int iTargetDay)
+    {
+    int i;
+    int iFinalDay;
+    char szDateNow[3];
+
+    if(!plPlant || plPlant->PI_Plant.szStartDate[0] == 0)
+        return FALSE;
+
+    if(iTargetDay <= 0)
+        iTargetDay = PS_Plant[iPlant].szGrowthStageDay[5];
+    if(iTargetDay <= 0)
+        iTargetDay = 200;
+
+    iFinalDay = min(iTargetDay, gMaxDays - 1);
+    if(iFinalDay < 30)
+        return FALSE;
+
+    giCurPlant = iPlant + 1;
+    giCurPlantPotOfs = CACalcPlantPotOffset(giCurPlant);
+
+    GLDateNow(szDateNow);
+    for(i = 0; i < 3; i++)
+        plPlant->PI_Plant.szStartDate[i] = szDateNow[i];
+    GLPreviousDate(plPlant->PI_Plant.szStartDate, iFinalDay - 1);
+
+    memset(plPlant->NO_Plant, 0, sizeof(plPlant->NO_Plant));
+    CAInitDefaultGrowDays(plPlant);
+
+    for(i = 1; i <= iFinalDay; i++)
+        {
+        giGrowDay = i;
+        CAApplyIdealGrowDay(plPlant, iPlant, i);
+        CACalcGrowthVariables(plPlant);
+        if((i % 2) == 0)
+            {
+            plPlant->GD_Plant[i].bWatered = TRUE;
+            giMoisture = min(2000, giMoisture + 1000);
+            giLastWatered = i;
+            }
+        if((i % 7) == 0)
+            {
+            plPlant->GD_Plant[i].bFertilized = TRUE;
+            plPlant->GD_Plant[i].szNutrients[0] = 15;
+            plPlant->GD_Plant[i].szNutrients[1] = 10;
+            plPlant->GD_Plant[i].szNutrients[2] = 10;
+            plPlant->GD_Plant[i].szNutrients[3] = 5;
+            giLastFertilized = i;
+            }
+        giHealth = 70;
+        if(giGrowthStage >= 7)
+            giGrowthStage = 5;
+        GLSaveGrowthVariables(plPlant);
+        plPlant->GD_Plant[i].cHealth = 70;
+        NOCalculateNodes(plPlant, iPlant);
+        GLSaveGrowthVariables(plPlant);
+        plPlant->GD_Plant[i].bVisited = TRUE;
+        }
+
+    giGrowDay = iFinalDay;
+    plPlant->PI_Plant.cGrowthStage = 5;
+    plPlant->GD_Plant[iFinalDay].bVisited = TRUE;
+    return TRUE;
+    }
+
+
 

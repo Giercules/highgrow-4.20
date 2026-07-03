@@ -244,6 +244,8 @@ BOOL GLUnscrambleText(LPSTR lpText);
 BOOL GLFormatDate(char* szDateBuf, char* szResult);
 // use this date function to return today's date in the form DMY
 BOOL GLDateNow(char *szDateBuf);
+// use this to move a DMY date backward by dayoffset days
+BOOL GLPreviousDate(char *szDateBuf, int dayoffset);
 // Use this format today's date in form Mon, 15 June 97
 BOOL GLNextFormatDate(char* szDateBuf, char* szResult, int dayoffset);
 // Use this format today's date in form Monday, 15 June 1997
